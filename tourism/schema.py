@@ -12,6 +12,7 @@ class AttractionType(DjangoObjectType):
 class Query(ObjectType):
     attraction = graphene.Field(AttractionType, id=graphene.Int())
     attraction_list = graphene.List(AttractionType)
+    attraction_by_province = graphene.List(AttractionType,id=graphene.Int())
 
     def resolve_attraction(self, info, **kwargs):
         id = kwargs.get('id')
@@ -23,5 +24,13 @@ class Query(ObjectType):
 
     def resolve_attraction_list(self, info, **kwargs):
         return attractions.objects.all()
+
+    def resolve_attraction_by_province(self,info,**kwargs):
+        id = kwargs.get('id')
+
+        if id is not None:
+            return attractions.objects.filter(province=id)
+
+        return None
 
 schema=graphene.Schema(query=Query,mutation=None)
