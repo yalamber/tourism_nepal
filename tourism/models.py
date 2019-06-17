@@ -6,9 +6,10 @@ class attractions(models.Model):
     image=models.CharField(max_length=200)
     img = ArrayField(models.CharField(max_length=1000, blank=True))
     description = ArrayField(models.CharField(max_length=10000, blank=True))
-    latitude = models.FloatField(default=27.489595)
-    longitude = models.FloatField(default=83.277083)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+    district = models.CharField(max_length=20,default='Kathmandu')
+    province = models.IntegerField(default=1)
 
     def __str__(self):
         return self.name
-    
