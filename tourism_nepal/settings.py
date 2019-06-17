@@ -84,10 +84,10 @@ WSGI_APPLICATION = 'tourism_nepal.wsgi.application'
 DATABASES = {
 'default': {
 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-'NAME': 'pmuosmmh',
-'USER':'pmuosmmh',
-'PASSWORD':'wd2pg5CwEPWe5VFQPvFrf11ykfoU4B6u',
-'HOST':'raja.db.elephantsql.com',
+'NAME': 'dcncgnmfovhaof',
+'USER':'nspuepjvohpcwa',
+'PASSWORD':'3c7eea5c5785c8828a4208dcd3b8323be180ba27d55a6ea5b7b5dec0befb48b9',
+'HOST':'ec2-107-22-238-217.compute-1.amazonaws.com',
 'PORT':'5432'
 }
 }
