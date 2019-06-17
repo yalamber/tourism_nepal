@@ -6,5 +6,5 @@ from .schema import schema
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',GraphQLView.as_view(graphiql=True)),
+    path('',csrf_exempt(GraphQLView.as_view(graphiql=True))),
 ]
