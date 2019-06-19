@@ -1,18 +1,24 @@
 import graphene
 from graphene_django.types import DjangoObjectType, ObjectType
-from .models import attractions
+from .models import attractions,festivals
 
 #Create a GraphQL type for the actor model
 class AttractionType(DjangoObjectType):
     class Meta:
         model = attractions
 
+class FestivalType(DjangoObjectType):
+    class Meta:
+        model = festivals
 
 #Create a query type
 class Query(ObjectType):
     attraction = graphene.Field(AttractionType, id=graphene.Int())
     attraction_list = graphene.List(AttractionType)
     attraction_by_province = graphene.List(AttractionType,id=graphene.Int())
+
+    festival = graphene.Field(FestivalType,id=graphene.Int())
+    festival_list = graphene.List(FestivalType)
 
     def resolve_attraction(self, info, **kwargs):
         id = kwargs.get('id')
@@ -32,5 +38,16 @@ class Query(ObjectType):
             return attractions.objects.filter(province=id)
 
         return None
+
+    def resolve_festival(self, info, **kwargs):
+        id = kwargs.get('id')
+
+        if id is not None:
+            return festivals.objects.get(pk=id)
+
+        return None
+
+    def resolve_festival_list(self, info, **kwargs):
+        return festivals.objects.all()
 
 schema=graphene.Schema(query=Query,mutation=None)
