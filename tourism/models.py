@@ -16,6 +16,8 @@ class attractions(models.Model):
 
 class hotels(models.Model):
     name=models.CharField(max_length=100)
+    image=models.CharField(max_length=200,null=True)
+    img = ArrayField(models.CharField(max_length=1000, blank=True),null=True)
     district=models.CharField(max_length=100)
     province=models.IntegerField(default=1)
     place=models.CharField(max_length=100)
@@ -35,6 +37,48 @@ class festivals(models.Model):
     image=models.CharField(max_length=200)
     img=ArrayField(models.CharField(max_length=1000, blank=True))
     description = ArrayField(models.CharField(max_length=10000, blank=True))
+
+    def __str__(self):
+        return self.name
+
+class cafe(models.Model):
+    name=models.CharField(max_length=100)
+    image=models.CharField(max_length=200)
+    img=ArrayField(models.CharField(max_length=1000, blank=True))
+    description = ArrayField(models.CharField(max_length=10000, blank=True))
+    district=models.CharField(max_length=100)
+    province=models.IntegerField(default=1)
+    place=models.CharField(max_length=100)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+
+    def __str__(self):
+        return self.name
+
+class pubs(models.Model):
+    name=models.CharField(max_length=100)
+    image=models.CharField(max_length=200)
+    img=ArrayField(models.CharField(max_length=1000, blank=True))
+    description = ArrayField(models.CharField(max_length=10000, blank=True))
+    district=models.CharField(max_length=100)
+    province=models.IntegerField(default=1)
+    place=models.CharField(max_length=100)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+
+    def __str__(self):
+        return self.name
+
+class restaurants(models.Model):
+    name=models.CharField(max_length=100)
+    image=models.CharField(max_length=200)
+    img = ArrayField(models.CharField(max_length=1000, blank=True))
+    district=models.CharField(max_length=100)
+    province=models.IntegerField(default=1)
+    place=models.CharField(max_length=100)
+    description=models.CharField(max_length=10000)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
 
     def __str__(self):
         return self.name
