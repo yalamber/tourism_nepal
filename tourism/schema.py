@@ -25,7 +25,7 @@ class Query(ObjectType):
     festival_list = graphene.List(FestivalType)
 
     pub = graphene.Field(PubType,id=graphene.Int())
-    pub_list = graphene.List(FestivalType)
+    pub_list = graphene.List(PubType)
 
     def resolve_attraction(self, info, **kwargs):
         id = kwargs.get('id')
