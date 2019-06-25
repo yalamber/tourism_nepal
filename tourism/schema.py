@@ -1,6 +1,6 @@
 import graphene
 from graphene_django.types import DjangoObjectType, ObjectType
-from .models import attractions,festivals,pubs
+from .models import attractions,festivals,pubs,restaurants
 
 #Create a GraphQL type for the actor model
 class AttractionType(DjangoObjectType):
@@ -15,6 +15,10 @@ class PubType(DjangoObjectType):
     class Meta:
         model = pubs
 
+class restaurantType(DjangoObjectType):
+    class Meta:
+        model = restaurants
+
 #Create a query type
 class Query(ObjectType):
     attraction = graphene.Field(AttractionType, id=graphene.Int())
@@ -26,6 +30,9 @@ class Query(ObjectType):
 
     pub = graphene.Field(PubType,id=graphene.Int())
     pub_list = graphene.List(PubType)
+
+    restaurant = graphene.Field(restaurantType,id=graphene.Int())
+    restaurant_list = graphene.List(restaurantType)
 
     def resolve_attraction(self, info, **kwargs):
         id = kwargs.get('id')
@@ -67,5 +74,16 @@ class Query(ObjectType):
 
     def resolve_pub_list(self, info, **kwargs):
         return pubs.objects.all()
+
+    def resolve_restaurant(self, info, **kwargs):
+        id = kwargs.get('id')
+
+        if id is not None:
+            return restaurants.objects.get(pk=id)
+
+        return None
+
+    def resolve_restaurant_list(self, info, **kwargs):
+        return restaurants.objects.all()
 
 schema=graphene.Schema(query=Query,mutation=None)
