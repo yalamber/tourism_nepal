@@ -45,7 +45,7 @@ class cafe(models.Model):
     name=models.CharField(max_length=100)
     image=models.CharField(max_length=200)
     img=ArrayField(models.CharField(max_length=1000, blank=True))
-    description = ArrayField(models.CharField(max_length=10000, blank=True))
+    description = models.CharField(max_length=10000)
     district=models.CharField(max_length=100)
     province=models.IntegerField(default=1)
     place=models.CharField(max_length=100)
