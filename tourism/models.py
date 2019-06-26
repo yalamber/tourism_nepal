@@ -20,7 +20,7 @@ class hotels(models.Model):
     district=models.CharField(max_length=100)
     province=models.IntegerField(default=1)
     place=models.CharField(max_length=100)
-    star=models.CharField(max_length=10)
+    star=models.CharField(max_length=100)
     cost=models.CharField(max_length=100)
     description=models.CharField(max_length=10000)
     amenities=ArrayField(models.CharField(max_length=10000, blank=True))
