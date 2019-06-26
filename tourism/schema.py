@@ -23,6 +23,9 @@ class cafeType(DjangoObjectType):
     class Meta:
         model = cafe
 
+class HotelType(DjangoObjectType):
+    class Meta:
+        model = hotels
 #Create a query type
 class Query(ObjectType):
     attraction = graphene.Field(AttractionType, id=graphene.Int())
@@ -40,6 +43,9 @@ class Query(ObjectType):
 
     cafe = graphene.Field(cafeType,id=graphene.Int())
     cafe_list = graphene.List(cafeType)
+
+    hotel = graphene.Field(HotelType,id=graphene.Int())
+    hotel_list = graphene.List(HotelType)
 
     def resolve_attraction(self, info, **kwargs):
         id = kwargs.get('id')
@@ -104,6 +110,16 @@ class Query(ObjectType):
     def resolve_cafe_list(self, info, **kwargs):
         return cafe.objects.all()
 
+    def resolve_hotel(self, info, **kwargs):
+        id = kwargs.get('id')
+
+        if id is not None:
+            return hotels.objects.get(pk=id)
+
+        return None
+
+    def resolve_hotel_list(self, info, **kwargs):
+        return hotels.objects.all()
 
 
 schema=graphene.Schema(query=Query,mutation=None)
